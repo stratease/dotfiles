@@ -11,9 +11,14 @@
 if [[ $(uname) == "Darwin" ]] ; then
 
   function battery_pct() {
+<<<<<<< HEAD
     local smart_battery_status="$(ioreg -rc "AppleSmartBattery")"
     typeset -F maxcapacity=$(echo $smart_battery_status | grep '^.*"MaxCapacity"\ =\ ' | sed -e 's/^.*"MaxCapacity"\ =\ //')
     typeset -F currentcapacity=$(echo $smart_battery_status | grep '^.*"CurrentCapacity"\ =\ ' | sed -e 's/^.*CurrentCapacity"\ =\ //')
+=======
+    typeset -F maxcapacity=$(ioreg -rc "AppleSmartBattery"| grep '^.*"MaxCapacity"\ =\ ' | sed -e 's/^.*"MaxCapacity"\ =\ //')
+    typeset -F currentcapacity=$(ioreg -rc "AppleSmartBattery"| grep '^.*"CurrentCapacity"\ =\ ' | sed -e 's/^.*CurrentCapacity"\ =\ //')
+>>>>>>> 488e6f1aa030b4b5c62a6fb96d6e59f17b751ff0
     integer i=$(((currentcapacity/maxcapacity) * 100))
     echo $i
   }
@@ -27,9 +32,14 @@ if [[ $(uname) == "Darwin" ]] ; then
   }
 
   function battery_time_remaining() {
+<<<<<<< HEAD
   	local smart_battery_status="$(ioreg -rc "AppleSmartBattery")"
     if [[ $(echo $smart_battery_status | grep -c '^.*"ExternalConnected"\ =\ No') -eq 1 ]] ; then
       timeremaining=$(echo $smart_battery_status | grep '^.*"AvgTimeToEmpty"\ =\ ' | sed -e 's/^.*"AvgTimeToEmpty"\ =\ //')
+=======
+    if [[ $(ioreg -rc AppleSmartBattery | grep -c '^.*"ExternalConnected"\ =\ No') -eq 1 ]] ; then
+      timeremaining=$(ioreg -rc "AppleSmartBattery"| grep '^.*"AvgTimeToEmpty"\ =\ ' | sed -e 's/^.*"AvgTimeToEmpty"\ =\ //')
+>>>>>>> 488e6f1aa030b4b5c62a6fb96d6e59f17b751ff0
       echo "~$((timeremaining / 60)):$((timeremaining % 60))"
     else
       echo "∞"
@@ -51,10 +61,13 @@ if [[ $(uname) == "Darwin" ]] ; then
       echo "∞"
     fi
   }
+<<<<<<< HEAD
   
   function battery_is_charging() {
 	  [[ $(ioreg -rc "AppleSmartBattery"| grep '^.*"IsCharging"\ =\ ' | sed -e 's/^.*"IsCharging"\ =\ //') == "Yes" ]]
   }
+=======
+>>>>>>> 488e6f1aa030b4b5c62a6fb96d6e59f17b751ff0
 
 elif [[ $(uname) == "Linux"  ]] ; then
 
@@ -85,6 +98,7 @@ elif [[ $(uname) == "Linux"  ]] ; then
       echo "∞"
     fi
   }
+<<<<<<< HEAD
   
   function battery_pct() {
     # todo for on linux
@@ -148,3 +162,16 @@ function battery_level_gauge() {
 }
 
 
+=======
+else
+	# Empty functions so we don't cause errors in prompts
+	function battery_pct_remaining() {
+	}
+
+	function battery_time_remaining() {
+	}
+
+	function battery_pct_prompt() {
+	}
+fi
+>>>>>>> 488e6f1aa030b4b5c62a6fb96d6e59f17b751ff0
