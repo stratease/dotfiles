@@ -47,4 +47,6 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
 
+# Custom bash functions
 gh() { git clone git@github.com:$1.git; }
+grr() { grep -r -i -n --color=always --include $2 $1 ./ ;}
