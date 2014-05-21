@@ -50,3 +50,5 @@ export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/
 # Custom bash functions
 gh() { git clone git@github.com:$1.git; }
 grr() { grep -r -i -n --color=always --include $2 $1 ./ ;}
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
